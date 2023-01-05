@@ -18,7 +18,7 @@ export const { config, styled, globalCss, keyframes, getCssText, css, theme, cre
             md: '1.125rem',
             lg: '1.25rem',
             xl: '1.5rem',
-            xxl: '2rem'
+            '2xl': '2rem'
         }
     }
 })
