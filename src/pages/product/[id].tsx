@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Stripe from "stripe"
 import { stripe } from "../../lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/pages/product"
+import axios from 'axios'
 
 interface ProductProps {
     product: {
@@ -16,8 +17,19 @@ interface ProductProps {
 }
 
 export default function Product ( { product }: ProductProps ) {
-    function handleByProduct() {
-        console.log(product.defaultPriceId);
+    async function handleByProduct() {
+        try {
+            // Connect with an observability tool
+            const response = await axios.post('/api/checkout', {
+                priceId: product.defaultPriceId
+            })
+
+            const { checkoutUrl } = response.data
+            window.location.href = checkoutUrl
+
+        } catch (error) {
+            alert('Falha ao redirecionar ao checkout')
+        }
     }
 
 
